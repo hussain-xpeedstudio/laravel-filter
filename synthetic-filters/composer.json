@@ -1,0 +1,25 @@
+{
+    "name": "yosuite/synthetic-filters",
+    "description": "The Synthetic Filters Laravel package is a powerful tool designed to streamline data filtering within Laravel applications. With this package, developers can effortlessly filter and query data based on specific table columns, significantly enhancing the flexibility and user-friendliness of their applications",
+    "version": "1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SyntheticFilters\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "XpeedStudio"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SyntheticFilters\\SyntheticFilterProvider"
+            ],
+            "config": "config/synthetic-filter.php"
+        }
+    }
+}
