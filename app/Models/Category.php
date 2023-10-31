@@ -8,7 +8,7 @@ use MongoDB\Laravel\Eloquent\Model;
 use SyntheticFilters\Traits\FilterTrait;
 class Category extends Model
 {
-    use HasFactory,FilterTrait;
+    use HasFactory;
 
     protected $fillable = [
         'name', 'status', 'user_id'
@@ -32,6 +32,11 @@ class Category extends Model
         ],
         
     ];
+    protected $sortFields = [
+        'name',
+        'status',
+        'user_id',
+      ];
     public function posts(){
         return $this->hasMany(Post::class);
     }

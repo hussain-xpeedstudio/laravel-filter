@@ -9,14 +9,13 @@ use SyntheticFilters\Traits\FilterTrait;
 
 class Post extends Model
 {
-    use HasFactory;
     use HasFactory, FilterTrait;
 
-    protected $fillable = [];
-    public function __construct()
-    {
-        $this->fillable = array_merge($this->fillable, array_keys($this->filterableAttributes));
-    }
+    protected $fillable = ['title', 'description', 'status', 'user_id', 'category_id'];
+    // public function __construct()
+    // {
+    //     $this->fillable = array_merge($this->fillable, array_keys($this->filterableAttributes));
+    // }
     public  $filterableAttributes = [
         'title' => [
             'type' => self::TEXT,
@@ -44,6 +43,9 @@ class Post extends Model
         ],
 
     ];
+    protected $sortFields = [
+        'title', 'description', 'status', 'user_id', 'category_id'
+      ];
     public function category()
     {
         return $this->belongsTo(Category::class);

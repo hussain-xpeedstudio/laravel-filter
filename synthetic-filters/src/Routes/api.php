@@ -14,7 +14,10 @@ use SyntheticFilters\Controllers\FilterController;
 |
 */
 
-Route::group(['middleware' => ['api'],'prefix' => 'api'], function () {
-    Route::get('/all-rules', [FilterController::class, 'getRulesList']);
-});
+// Route::group(['middleware' => ['api'],'prefix' => 'api'], function () {
+//     Route::get('/all-rules', [FilterController::class, 'getRulesList']);
+//     Route::get('{segment}/test', [FilterController::class, 'getStructure'])
+//     ->where('segment', '([^\/]+)(?=\/test)');
+   
+// });
 

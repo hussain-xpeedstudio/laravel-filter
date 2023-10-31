@@ -13,21 +13,38 @@ use Faker\Factory as Faker;
 class FilterController extends Controller
 {
     use ResponseTrait;
-    public function getPostData()
+    public function getPostTableData()
     {
-        $posts = Post::sort()->filter()->with('category:name,status,user_id')
-            ->get();
+        $posts = Post::sort()->filter()->with('category:name')
+            ->simplePaginate(10);
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
-            data: $posts,
+            data: $posts->toArray(),
             status: 200
         );
     }
-    public function getModelFilterStructure(){
+    public function getPostFilterStructure(){
         $properties=new Post();
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $properties->filterData(),
+            status: 200
+        );
+    }
+    public function getCategoryStructure(){
+        $properties=new Category();
+        $this->log('success', 'Data Fetched successfully');
+        return $this->response(
+            data: $properties->filterData(),
+            status: 200
+        );
+    }
+    public function getCategoryRelationData(){
+        $search_text=request('search_text');
+        $categories=$search_text?Category::where('name','like','%'.$search_text.'%')->select(['id', 'name'])->simplePaginate(10):Category::select(['id', 'name'])->simplePaginate(10);
+        $this->log('success', 'Data Fetched successfully');
+        return $this->response(
+            data: $categories->toArray(),
             status: 200
         );
     }
