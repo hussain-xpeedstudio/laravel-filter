@@ -11,12 +11,11 @@ trait ApiResponseTrait
         $data = null,
         array $headers = [],
         $tracer = null
-    )
-    {
+    ) {
         $response = [
             'message' => [
                 'error' => $this->errorMessages,
-            ],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            ],
             'tracer' => $tracer,
             'data' => $data,
         ];
@@ -26,7 +25,7 @@ trait ApiResponseTrait
 
     public function log($type, $message)
     {
-        if (!isset($this->errorMessages[$type])) {
+        if (! isset($this->errorMessages[$type])) {
             $this->errorMessages[$type] = [];
         }
 

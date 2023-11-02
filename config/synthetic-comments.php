@@ -1,4 +1,5 @@
 <?php
+
 return [
     'multiple_database' => false,
     /**
@@ -19,5 +20,5 @@ return [
      */
     'config' => [
         'document' => App\Models\Document::class,
-    ]
+    ],
 ];

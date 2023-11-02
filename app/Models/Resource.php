@@ -4,7 +4,6 @@ namespace SyntheticComments\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Resource extends Model
 {
@@ -12,10 +11,10 @@ class Resource extends Model
     protected $model;
     protected $commentTable;
     protected $fillable = [
-     'resource', 'resource_id','parent_comment_id','body','type', 'visibility','user_id'
+        'resource', 'resource_id', 'parent_comment_id', 'body', 'type', 'visibility', 'user_id',
     ];
 
-    public  function setTable($tableName)
+    public function setTable($tableName)
     {
         $this->table = $tableName;
     }
@@ -28,7 +27,7 @@ class Resource extends Model
     public function replies()
     {
         return $this->hasMany(Resource::class, 'parent_comment_id', 'id')
-            ->from(config('synthetic-comments.table_prefix') . '_' . $this->table)
+            ->from(config('synthetic-comments.table_prefix').'_'.$this->table)
             ->SetDatabase();
     }
 

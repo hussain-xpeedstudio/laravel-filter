@@ -1,185 +1,186 @@
 <?php
+
 return [
-    'row_limit'=>5,
-    'column_limit'=>3,
+    'row_limit' => 5,
+    'column_limit' => 3,
     'fieldTypes' => [
         'string' => [
             'contains' => [
                 'label' => 'Contains',
-                'condition' => '$contains'
+                'condition' => '$contains',
             ],
             'starts_with' => [
                 'label' => 'Starts With',
-                'condition' => '$startsWith'
+                'condition' => '$startsWith',
             ],
             'does_not_contain' => [
                 'label' => "Doesn't Contain",
-                'condition' => ' $notContains'
+                'condition' => ' $notContains',
             ],
             'ends_with' => [
                 'label' => 'Ends With',
-                'condition' => '$endsWith'
+                'condition' => '$endsWith',
             ],
             'is_empty' => [
                 'label' => 'Is Empty',
-                'condition' => '$null'
+                'condition' => '$null',
             ],
             'is_not_empty' => [
                 'label' => 'Is Not Empty',
-                'condition' => '$notNull'
+                'condition' => '$notNull',
             ],
         ],
         'text' => [
             'contains' => [
                 'label' => 'Contains',
-                'condition' => '$contains'
+                'condition' => '$contains',
             ],
             'starts_with' => [
                 'label' => 'Starts With',
-                'condition' => '$startsWith'
+                'condition' => '$startsWith',
             ],
             'does_not_contain' => [
                 'label' => "Doesn't Contain",
-                'condition' => ' $notContains'
+                'condition' => ' $notContains',
             ],
             'ends_with' => [
                 'label' => 'Ends With',
-                'condition' => '$endsWith'
+                'condition' => '$endsWith',
             ],
             'is_empty' => [
                 'label' => 'Is Empty',
-                'condition' => '$null'
+                'condition' => '$null',
             ],
             'is_not_empty' => [
                 'label' => 'Is Not Empty',
-                'condition' => '$notNull'
+                'condition' => '$notNull',
             ],
         ],
         'textarea' => [
             'contains' => [
                 'label' => 'Contains',
-                'condition' => '$contains'
+                'condition' => '$contains',
             ],
             'starts_with' => [
                 'label' => 'Starts With',
-                'condition' => '$startsWith'
+                'condition' => '$startsWith',
             ],
             'does_not_contain' => [
                 'label' => "Doesn't Contain",
-                'condition' => ' $notContains'
+                'condition' => ' $notContains',
             ],
             'ends_with' => [
                 'label' => 'Ends With',
-                'condition' => '$endsWith'
+                'condition' => '$endsWith',
             ],
             'is_empty' => [
                 'label' => 'Is Empty',
-                'condition' => '$null'
+                'condition' => '$null',
             ],
             'is_not_empty' => [
                 'label' => 'Is Not Empty',
-                'condition' => '$notNull'
+                'condition' => '$notNull',
             ],
         ],
         'number' => [
             '=' => [
                 'label' => 'Equal',
-                'condition' => '$eq'
+                'condition' => '$eq',
             ],
             '>' => [
                 'label' => 'Greater Than',
-                'condition' => '$gt'
+                'condition' => '$gt',
             ],
             '<' => [
                 'label' => 'Less Than',
-                'condition' => '$lt'
+                'condition' => '$lt',
             ],
             '>=' => [
                 'label' => 'Greater Than or Equal To',
-                'condition' => '$gte'
+                'condition' => '$gte',
             ],
             '<=' => [
                 'label' => 'Less Than or Equal To',
-                'condition' => '$lte'
-            ]
+                'condition' => '$lte',
+            ],
         ],
         'numeric' => [
             '=' => [
                 'label' => 'Equal',
-                'condition' => '$eq'
+                'condition' => '$eq',
             ],
             '>' => [
                 'label' => 'Greater Than',
-                'condition' => '$gt'
+                'condition' => '$gt',
             ],
             '<' => [
                 'label' => 'Less Than',
-                'condition' => '$lt'
+                'condition' => '$lt',
             ],
             '>=' => [
                 'label' => 'Greater Than or Equal To',
-                'condition' => '$gte'
+                'condition' => '$gte',
             ],
             '<=' => [
                 'label' => 'Less Than or Equal To',
-                'condition' => '$lte'
-            ]
+                'condition' => '$lte',
+            ],
         ],
         'date' => [
             'equal' => [
                 'label' => 'Equal',
-                'condition' => '$eq'
+                'condition' => '$eq',
             ],
             'before' => [
                 'label' => 'Before',
-                'condition' => '$lt'
+                'condition' => '$lt',
             ],
             'before_or_equal' => [
                 'label' => 'Before or Equal',
-                'condition' => '$lte'
+                'condition' => '$lte',
             ],
             'after' => [
                 'label' => 'After',
-                'condition' => '$gt'
+                'condition' => '$gt',
             ],
             'after_or_equal' => [
                 'label' => 'After or Equal',
-                'condition' => '$gte'
+                'condition' => '$gte',
             ],
             'between' => [
                 'label' => 'Between',
-                'condition' => '$between'
+                'condition' => '$between',
             ],
             'is_empty' => [
                 'label' => 'Is Empty',
-                'condition' => '$null'
+                'condition' => '$null',
             ],
             'is_not_empty' => [
                 'label' => 'Is Not Empty',
-                'condition' => '$notNull'
+                'condition' => '$notNull',
             ],
         ],
         'boolean' => [
             'true' => [
                 'label' => 'True',
-                'condition' => '$eq'
+                'condition' => '$eq',
             ],
             'false' => [
                 'label' => 'False',
-                'condition' => '$eq'
+                'condition' => '$eq',
             ],
         ],
         'select' => [
             'WhereIn' => [
                 'label' => 'Where In',
-                'condition' => '$in'
+                'condition' => '$in',
             ],
 
         ],
         'dropdown' => [
             'WhereIn' => [
                 'label' => '',
-                'condition' => '$in'
+                'condition' => '$in',
             ],
 
         ],
@@ -289,5 +290,5 @@ return [
                 'field' => null,
             ],
         ],
-    ]
+    ],
 ];
