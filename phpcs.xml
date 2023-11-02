@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="Custom Coding Standard">
+    <description>My Custom Coding Standard</description>
+    <rule ref="PSR1"/>
+    <rule ref="PSR2"/>
+    <rule ref="PSR12"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
+        <type>warning</type>
+    </rule>
+    <exclude-pattern>dev-*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>storage/*</exclude-pattern>
+	<exclude-pattern>bootstrap/*</exclude-pattern>
+	<exclude-pattern>config/*</exclude-pattern>
+	<exclude-pattern>public/*</exclude-pattern>
+	<exclude-pattern>tests/*</exclude-pattern>
+</ruleset>
