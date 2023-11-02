@@ -1,22 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use SyntheticFilters\Traits\ResponseTrait;
-// use SyntheticFilters\Traits\FilterTrait;
-use App\Models\Document;
 use App\Models\Category;
 use App\Models\Post;
 use Faker\Factory as Faker;
-
 class FilterController extends Controller
 {
     use ResponseTrait;
     public function getPostTableData()
     {
+        Post::boot();
         $posts = Post::sort()->filter()->with('category:name')
             ->simplePaginate(10);
+        $this->log('success', 'Data Fetched successfully');
+        return $this->response(
+            data: $posts->toArray(),
+            status: 200
+        );
+    }
+    public function getPostTableStructure()
+    {
+        $table_structure =Config('table-structure');
+        $this->log('success', 'Data Fetched successfully');
+        return $this->response(
+            data: $table_structure,
+            status: 200
+        );
+    }
+    public function testFunction()
+    {
+        Post::boot();
+        $posts = Post::sort()->filter()->with('category:name')
+                    ->simplePaginate(10);
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $posts->toArray(),
@@ -41,7 +58,13 @@ class FilterController extends Controller
     }
     public function getCategoryRelationData(){
         $search_text=request('search_text');
-        $categories=$search_text?Category::where('name','like','%'.$search_text.'%')->select(['id', 'name'])->simplePaginate(10):Category::select(['id', 'name'])->simplePaginate(10);
+        $categories=$search_text?
+                    Category::where('name', 'like', '%' . $search_text . '%')
+                    ->select(['id', 'name', 'status'])
+                    ->simplePaginate(10) 
+                    : 
+                    Category::select(['id', 'name','status'])
+                            ->simplePaginate(10);
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $categories->toArray(),
