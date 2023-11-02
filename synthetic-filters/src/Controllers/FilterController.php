@@ -99,6 +99,26 @@ class FilterController
         //
     }
 
+    public function filterStructureGET($filter)
+    {
+        $filter = Filter::where('resource_id', $filter)->first();
+        if ($filter) {
+            $this->log('success', 'Data fetch successfully');
+
+            return $this->response(
+                data: $filter->toArray(),
+                status: 200
+            );
+        } else {
+            $this->log('error', 'Data not found');
+
+            return $this->response(
+                data: [],
+                status: 400
+            );
+        }
+    }
+
     public function filterStructureSave(Request $request, $table, $table_id)
     {
         $request->merge([

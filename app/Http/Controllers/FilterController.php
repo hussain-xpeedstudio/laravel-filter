@@ -82,7 +82,7 @@ class FilterController extends Controller
     }
     public function getCategoryStructure()
     {
-        $properties = new Category;
+        $properties = new Category();
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $properties->filterData(),
@@ -107,12 +107,12 @@ class FilterController extends Controller
         $random_status = $stat_arr[$index];
         $faker = Faker::create();
         $randomCategoryName = $faker->word();
-        $category = new Category;
+        $category = new Category();
         $category->name = $randomCategoryName;
         $category->status = $random_status;
         $category->user_id = 1;
         $category->save();
-        $post = new Post;
+        $post = new Post();
         $post->category_id = $category->id;
         $post->title = $faker->sentence();
         $post->status = $random_status;
