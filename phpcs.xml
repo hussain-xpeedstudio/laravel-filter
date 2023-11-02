@@ -4,9 +4,22 @@
     <rule ref="PSR1"/>
     <rule ref="PSR2"/>
     <rule ref="PSR12"/>
+
+    <exclude name="PSR12.Traits.UseDeclaration"/>
+
     <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
         <type>warning</type>
     </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="1200" />
+            <property name="absoluteLineLimit" value="true" />
+        </properties>
+    </rule>
+
+
+
     <exclude-pattern>dev-*</exclude-pattern>
 	<exclude-pattern>node_modules/*</exclude-pattern>
 	<exclude-pattern>vendor/*</exclude-pattern>
