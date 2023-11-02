@@ -13,40 +13,6 @@ class FilterController
     /**
      * Display a listing of the resource.
      */
-    public function getRulesList()
-    {
-        try {
-            $this->log('success', 'Data Fetched successfully');
-            return $this->response(
-                data: config('synthetic-filter.allRules'),
-                status: 200
-            );
-        } catch (\Exception) {
-            $this->log('success', 'Something went wrong');
-            return $this->response(
-                data:[],
-                status: 500
-            );
-        }
-    }
-    public function getStructure($segment){
-        // try{
-        //     $model='App\Models\\'. ucfirst(Str::camel(Str::singular($segment)));
-        //     return $this->test($model);     
-        // }
-        // catch(\Exception $e){
-        //     $this->log('error', $e->getMessage());
-        //     return $this->response(
-        //         data:[],
-        //         status: 500
-        //     );
-        // }
-        $model='App\Models\\'. ucfirst(Str::camel(Str::singular($segment)));
-       // dd($model);
-        //return $model=app($model);
-        return $this->test($model);    
-    }
- 
     /**
      * Show the form for creating a new resource.
      */

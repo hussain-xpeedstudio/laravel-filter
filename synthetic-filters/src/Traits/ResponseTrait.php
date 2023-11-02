@@ -22,8 +22,6 @@ trait ResponseTrait
 
         return response()->json($response, $status, $headers);
     }
-
-
     public function log($type, $message)
     {
         if (!isset($this->errorMessages[$type])) {
