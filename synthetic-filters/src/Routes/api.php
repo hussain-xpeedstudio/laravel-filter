@@ -14,4 +14,5 @@ use SyntheticFilters\Controllers\FilterController;
 |
 */
 
-Route::post('api/filter/{table}/{table_id}', [FilterController::class, 'filter_structure_save']);
+Route::get('api/filter/{table_id}', [FilterController::class, 'filterStructureGet']);
+Route::post('api/filter/{table}/{table_id}', [FilterController::class, 'filterStructureSave']);
