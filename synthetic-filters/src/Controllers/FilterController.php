@@ -2,6 +2,7 @@
 
 namespace SyntheticFilters\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use SyntheticFilters\Models\Filter;
@@ -101,22 +102,48 @@ class FilterController
 
     public function filterStructureGET($filter)
     {
-        $filter = Filter::where('resource_id', $filter)->first();
-        if ($filter) {
-            $this->log('success', 'Data fetch successfully');
+        $posts = Post::sort()->filter()->withoutEagerLoads()->paginate(10);
+        $posts->data = $posts->toFlatArray();
+        return $this->response(
+            data: $posts->toArray(),
+            status: 200
+        );
+        // dd($post, Post::getValidRelations());
+        // foreach (Post::getValidRelations() as $relation) {
+        //     if (array_key_exists('relationField', $relation)) {
+        //         foreach ($relation['relationField'] as $key => $value) {
+        //             dd($post);
+        //             $post->{$relation['relation'] . '_' . $value} = $post->{$relation['relation']}->$value;
+        //             dd($post);
+        //         }
+        //     }
+        //     // else {
+        //     //     dd('nnnnnnnn');
+        //     // }
+        //     // if (!$post->has($relation)) {
+        //     //     dd('not found');
+        //     // } else {
+        //     //     $post->{$relation . '_name'} = $post->$relation->name;
+        //     //     dd('found', $post);
+        //     // }
+        // }
+        // dd(Post::getValidRelations(['category']));
+        // $filter = Filter::where('resource_id', $filter)->first();
+        // if ($filter) {
+        //     $this->log('success', 'Data fetch successfully');
 
-            return $this->response(
-                data: $filter->toArray(),
-                status: 200
-            );
-        } else {
-            $this->log('error', 'Data not found');
+        //     return $this->response(
+        //         data: $filter->toArray(),
+        //         status: 200
+        //     );
+        // } else {
+        //     $this->log('error', 'Data not found');
 
-            return $this->response(
-                data: [],
-                status: 400
-            );
-        }
+        //     return $this->response(
+        //         data: [],
+        //         status: 400
+        //     );
+        // }
     }
 
     public function filterStructureSave(Request $request, $table, $table_id)

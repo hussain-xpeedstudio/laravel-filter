@@ -69,12 +69,19 @@ class Post extends Model
             'type' => self::SELECT,
             'label' => 'Employee ID',
             'isMultiSelect' => true,
+            //relation
+            'relation' => 'user',
         ],
         'category_id' => [
             'type' => self::SELECT,
             'label' => 'Category',
             'model' => Category::class,
             'isMultiSelect' => false,
+            //relation
+            'relation' => 'category',
+            'relationField' => [
+                'name', 'status'
+            ]
         ],
 
     ];
@@ -91,8 +98,30 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function getCategoryNameAttribute()
-    // {
-    //     return $this->category->name;
-    // }
+    protected function getValidRelations()
+    {
+        /**
+         * need this part later
+         */
+        // return array_filter($this->filterableAttributes, function ($item) {
+        //     if (isset($item['relation']) && $item['relation'] != '') {
+        //         return $item['relation'];
+        //     };
+        // });
+
+        return [
+            'user_id' => [
+                'relationWith' => 'user',
+                'relationColumn' => [
+                    'email'
+                ]
+            ],
+            'category_id' => [
+                'relationWith' => 'category',
+                'relationColumn' => [
+                    'name', 'status'
+                ]
+            ]
+        ];
+    }
 }
