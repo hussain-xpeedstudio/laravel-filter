@@ -1,5 +1,5 @@
 <?php
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use SyntheticFilters\Controllers\FilterController;
 
@@ -14,10 +14,5 @@ use SyntheticFilters\Controllers\FilterController;
 |
 */
 
-// Route::group(['middleware' => ['api'],'prefix' => 'api'], function () {
-//     Route::get('/all-rules', [FilterController::class, 'getRulesList']);
-//     Route::get('{segment}/test', [FilterController::class, 'getStructure'])
-//     ->where('segment', '([^\/]+)(?=\/test)');
-   
-// });
-
+Route::get('api/filter/{table_id}', [FilterController::class, 'filterStructureGet']);
+Route::post('api/filter/{table}/{table_id}', [FilterController::class, 'filterStructureSave']);

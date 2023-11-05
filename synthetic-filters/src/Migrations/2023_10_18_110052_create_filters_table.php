@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('resource');
             $table->string('resource_id');
+            $table->string('user_id');
             $table->text('filter_object');
-            $table->integer('user_id');
             $table->boolean('visiblity');
             $table->timestamps();
         });

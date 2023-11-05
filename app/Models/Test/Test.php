@@ -5,10 +5,12 @@ namespace App\Models\Test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use SyntheticFilters\Traits\FilterTrait;
+
 class Test extends Model
 {
-    use HasFactory,FilterTrait;
-    public  $filterableAttributes = [
+    use FilterTrait, HasFactory;
+
+    public $filterableAttributes = [
         'title' => [
             'type' => self::TEXT,
             'label' => 'Title',
@@ -17,7 +19,6 @@ class Test extends Model
             'type' => self::TEXT,
             'label' => 'Title',
         ],
-        
 
     ];
 }

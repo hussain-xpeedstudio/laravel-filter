@@ -4,18 +4,18 @@ namespace SyntheticComments\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Resource extends Model
 {
     use HasFactory;
+
     protected $model;
     protected $commentTable;
     protected $fillable = [
-     'resource', 'resource_id','parent_comment_id','body','type', 'visibility','user_id'
+        'resource', 'resource_id', 'parent_comment_id', 'body', 'type', 'visibility', 'user_id',
     ];
 
-    public  function setTable($tableName)
+    public function setTable($tableName)
     {
         $this->table = $tableName;
     }
@@ -31,5 +31,4 @@ class Resource extends Model
             ->from(config('synthetic-comments.table_prefix') . '_' . $this->table)
             ->SetDatabase();
     }
-
 }
