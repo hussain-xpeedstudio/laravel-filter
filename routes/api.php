@@ -18,13 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/post/component/filter/structure', [FilterController::class, 'getPostFilterStructure']); // Done
-Route::get('/post/component/filter/data', [FilterController::class, 'getPostFilterData']); // Will do that on stage 2
+Route::get('/module/people/post/component/filter/structure', [FilterController::class, 'getFilterStructure']); // Done
+Route::get('/module/people/post/component/filter/content', [FilterController::class, 'getFilterContent']); // Will do that on stage 2
+Route::post('/module/people/post/component/filter/content/store/{filter?}', [FilterController::class, 'storeFilterContent']);
+Route::get('/module/people/post/component/filter/content/delete/{filter}', [FilterController::class, 'deleteFilterContent']);
 
 // Data Component (Table Data+ Table Structure)
-Route::get('/post/component/table/structure', [FilterController::class, 'getPostTableStructure']); // Talk with Rashed bhai pass static json
-Route::get('/post/component/table/data', [FilterController::class, 'getPostTableData']); // Done
+Route::get('/module/people/post/component/table/structure', [FilterController::class, 'getContentStructure']); // Talk with Rashed bhai pass static json
+Route::get('/module/people/post/component/table/content', [FilterController::class, 'getContent']); // Done
 
 // Relation Data
-Route::get('/post/relation/category/list', [FilterController::class, 'getCategoryRelationData']); //url encoded searching enabled
-Route::get('/post/relation/category/selected', [FilterController::class, 'getCategoryRelationSelectedData']);
+Route::get('/module/people/post/relation/category/list', [FilterController::class, 'getCategoryRelationData']); //url encoded searching enabled
+Route::get('/module/people/post/relation/category/selected', [FilterController::class, 'getCategoryRelationSelectedData']);

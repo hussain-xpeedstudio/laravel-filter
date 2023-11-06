@@ -2,83 +2,137 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use SyntheticFilters\Traits\ResponseTrait;
 use App\Models\Category;
-// use SyntheticFilters\Traits\FilterTrait;
 use App\Models\Post;
 use Faker\Factory as Faker;
-use Illuminate\Support\Arr;
-use SyntheticFilters\Traits\ResponseTrait;
+use SyntheticFilters\Models\Filter;
+use Illuminate\Support\Facades\Validator;
 
 class FilterController extends Controller
 {
     use ResponseTrait;
-
-    public function getPostTableData()
+    public function getContent()
     {
         $posts = Post::sort()->filter()->with('category:name', 'user')->paginate(10);
         $posts->data = $posts->toFlatArray();
-        // dd($posts->items()[0]->getRelations()->setAttribute([
-        //     'asdfsd', 'saffdsd'
-        // ]));
-        // $posts->items()[0]->setAttribute('asdfsd', 'saffdsd');
-        // dd($posts['data']->getRelations());
-        // $posts = Post::sort()->filter()->paginate(10)->get();
-
-        // foreach ($posts as $key => $value) {
-        //     $flattenedArray[] = $this->flattenArray($value);
-        // }
-
-        // dd($posts);
-        // $result = collect($posts)
-        //     ->map(function ($item) {
-        //         dd($item);
-        //     })
-        //     ->flatten()
-        //     ->toArray();
-        // dd($result);
-        // dd($posts['data']->getRelations());
-        // $end_time = microtime(true);
-        // $execution_time = ($end_time - $start_time);
-        // \Illuminate\Support\Facades\Log::info("Script execution time: $execution_time seconds");
-        // dd($flattenedArray, $execution_time);
-
-        // dd(Arr::flatten($posts));
-        // $posts = $posts->flattenTree('category')->toArray();
-        // dd($flattened);
-        // $posts['data'] = collect($posts['data'])->map(function ($post) {
-        //     if (isset($post['category'])) {
-        //         $post['cname'] = $post['category']['name'];
-        //         unset($post['category']);
-        //     }
-        //     return $post;
-        // })->toArray();
-
-        // dd($posts);
-        // $data = collect($posts['data'])->pluck('category');
-        // dd($data);
-        // $data = collect($posts['data'])->mapWithKeys(function ($item) {
-
-        //     return [
-        //         '_id' => $item['_id'],
-        //         'title' => $item['title']
-        //     ];
-        // });
-        // dd($data->all());
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $posts->toArray(),
             status: 200
         );
     }
-    public function getPostFilterStructure()
+    public function getContentStructure()
+    {
+        $table_structure = Config('table-structure');
+        $this->log('success', 'Data Fetched successfully');
+        return $this->response(
+            data: $table_structure,
+            status: 200
+        );
+    }
+    public function getFilterStructure()
     {
         $properties = new Post();
-
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $properties->filterData(),
             status: 200
         );
+    }
+    public function getFilterContent()
+    {
+        $properties = new Post();
+        $this->log('success', 'Data Fetched successfully');
+        $filter_data = Filter::where(['resource' => 'App\Models\Post', 'user_id' => '1'])->first() ?? Filter::where(['resource' => 'App\Models\Post', 'visibility' => true])->first();
+        return $this->response(
+            data: $filter_data ? $filter_data->toArray() : [],
+            status: 200
+        );
+    }
+    public function storeFilterContent(Request $request, $filter_id = null)
+    {
+        $request->merge([
+            'resource' => Post::class,
+            'resource_id' => '',
+        ]);
+        try {
+            $validator = Validator::make($request->all(), [
+                'filter_object' => 'required',
+                'visibility' => 'required|boolean',
+            ]);
+            if ($validator->fails()) {
+                $this->log('error', 'validation fails');
+                return $this->response(
+                    data: [],
+                    status: 403
+                );
+            }
+            if ($filter_id) {
+                $data = Filter::find($filter_id);
+                if ($data) {
+                    $data->resource = $request->resource;
+                    $data->resource_id = $request->resource_id;
+                    $data->user_id = 1;
+                    $data->filter_object = $request->filter_object;
+                    $data->visiblity = $request->visibility;
+                    $data->save();
+                    $this->log('success', 'Filter data updated successfully');
+                } else {
+                    $this->log('error', 'Filter data not found');
+                    return $this->response(
+                        data: [],
+                        status: 404
+                    );
+                }
+            } else {
+                $data = new Filter();
+                $data->resource = $request->resource;
+                $data->resource_id = $request->resource_id;
+                $data->user_id = 1;
+                $data->filter_object = $request->filter_object;
+                $data->visiblity = $request->visibility;
+                $data->save();
+                $this->log('success', 'Filter data store successfully');
+            }
+            return $this->response(
+                data: $data->toArray(),
+                status: 404
+            );
+        } catch (\Exception $e) {
+            $this->log('error', $e->getMessage());
+            return $this->response(
+                data: [],
+                status: 500
+            );
+        }
+    }
+    public function deleteFilterContent($id)
+    {
+        try {
+            $filter = Filter::find($id);
+            if ($filter) {
+                $filter->delete();
+                $this->log('success', 'Filter data deleted successfully');
+            } else {
+                $this->log('error', 'Filter data not found');
+                return $this->response(
+                    data: [],
+                    status: 404
+                );
+            }
+            return $this->response(
+                data: [],
+                status: 200
+            );
+        } catch (\Exception $e) {
+            $this->log('error', $e->getMessage());
+            return $this->response(
+                data: [],
+                status: 500
+            );
+        }
     }
     public function getCategoryStructure()
     {
@@ -92,7 +146,13 @@ class FilterController extends Controller
     public function getCategoryRelationData()
     {
         $search_text = request('search_text');
-        $categories = $search_text ? Category::where('name', 'like', '%' . $search_text . '%')->select(['id', 'name'])->simplePaginate(10) : Category::select(['id', 'name'])->simplePaginate(10);
+        $categories = $search_text ?
+            Category::where('name', 'like', '%' . $search_text . '%')
+            ->select(['id', 'name', 'status'])
+            ->simplePaginate(10)
+            :
+            Category::select(['id', 'name', 'status'])
+            ->simplePaginate(10);
         $this->log('success', 'Data Fetched successfully');
         return $this->response(
             data: $categories->toArray(),
@@ -123,22 +183,5 @@ class FilterController extends Controller
             data: [],
             status: 200
         );
-    }
-
-    public function flattenArray($array, $parentKey = '')
-    {
-        $result = [];
-
-        foreach ($array as $key => $value) {
-            $newKey = empty($parentKey) ? $key : $parentKey . '_' . $key;
-
-            if (is_array($value)) {
-                $result = array_merge($result, $this->flattenArray($value, $newKey));
-            } else {
-                $result[$newKey] = $value;
-            }
-        }
-
-        return $result;
     }
 }

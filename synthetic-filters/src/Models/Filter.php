@@ -8,4 +8,5 @@ use MongoDB\Laravel\Eloquent\Model;
 class Filter extends Model
 {
     use HasFactory;
+    protected $collection = 'filters';
 }

@@ -10,47 +10,7 @@ use SyntheticFilters\Traits\FilterTrait;
 class Post extends Model
 {
     use FilterTrait, HasFactory;
-
     protected $fillable = ['title', 'description', 'status', 'user_id', 'category_id'];
-
-    // public function __call($method, $parameters)
-    // {
-    //     return parent::__call($method, $parameters);
-    //     // dd($this->getRelations());
-    //     // $user = \App\Models\Post::class;
-    //     // $reflector = new \ReflectionClass($user);
-    //     // $relations = [];
-    //     // foreach ($reflector->getMethods() as $reflectionMethod) {
-    //     //     $returnType = $reflectionMethod->getReturnType();
-    //     //     dd($returnType, $reflectionMethod);
-    //     //     if ($returnType) {
-    //     //         if (in_array(class_basename($returnType->getName()), ['HasOne', 'HasMany', 'BelongsTo', 'BelongsToMany', 'MorphToMany', 'MorphTo'])) {
-    //     //             $relations[] = $reflectionMethod;
-    //     //         }
-    //     //     }
-    //     // }
-    //     return true;
-
-    //     // dd($relations);
-    // }
-    // public static function definedRelations(): array
-    // {
-    //     $reflector = new \ReflectionClass(get_called_class());
-
-    //     return collect($reflector->getMethods())
-    //         ->filter(
-    //             fn ($method) => !empty($method->getReturnType()) &&
-    //                 str_contains(
-    //                     $method->getReturnType(),
-    //                     'Illuminate\Database\Eloquent\Relations'
-    //                 )
-    //         )
-    //         ->pluck('name')
-    //         ->all();
-    // }
-
-    // protected $appends = ['category_name'];
-
     public $filterableAttributes = [
         'title' => [
             'type' => self::TEXT,
@@ -98,24 +58,9 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected function getValidRelations()
+     protected function getValidRelations()
     {
-        /**
-         * need this part later
-         */
-        // return array_filter($this->filterableAttributes, function ($item) {
-        //     if (isset($item['relation']) && $item['relation'] != '') {
-        //         return $item['relation'];
-        //     };
-        // });
-
         return [
-            'user_id' => [
-                'relationWith' => 'user',
-                'relationColumn' => [
-                    'email'
-                ]
-            ],
             'category_id' => [
                 'relationWith' => 'category',
                 'relationColumn' => [

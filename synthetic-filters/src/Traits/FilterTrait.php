@@ -44,29 +44,6 @@ trait FilterTrait
         }
         return $data;
     }
-    public function test($className)
-    {
-        $instance = app($className);
-        $reflection = new \ReflectionClass($instance); // Replicated class
-        $property = $reflection->getProperty('filterableAttributes');
-        $property->setAccessible(true);
-        $filterAttribute = $property->getValue($instance);
-        $data = [];
-        foreach ($filterAttribute as $key => $value) {
-            $endPoint = '';
-
-            if (!empty($value['model'])) {
-                $endPoint = '/api/post/relation/' . Str::snake(class_basename($value['model'])) . '/list';
-            }
-            $data[$key] = [
-                'label' => $value['label'] ?? '',
-                'type' => $value['type'],
-                'optionsData' => $endPoint,
-                'isMultiSelect' => $value['isMultiSelect'] ?? true,
-            ];
-        }
-        return $data;
-    }
     public function newCollection(array $models = [])
     {
         return new CustomCollection($models);
