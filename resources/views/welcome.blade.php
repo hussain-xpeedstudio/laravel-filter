@@ -844,18 +844,20 @@
 <body class="antialiased">
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         <div class="max-w-12xl mx-auto p-12 lg:p-12">
-            <h3>Filter Section</h3>
+            <h3 style="font-size:20px">Filter Section</h3>
             <li>Structure-<a href="{{url('/module/people/post/component/filter/structure')}}" target="_blank">{{url('/module/people/post/component/filter/structure')}}</a></li>
             <li>Content -<a href="{{url('/module/people/post/component/filter/content')}}" target="_blank">{{url('/module/people/post/component/filter/content')}}</a></li>
             <li>Store -<a href="{{url('/module/people/post/component/filter/content/store/{filter_id?}')}}" target="_blank">{{url('/module/people/post/component/filter/content/store/{filter_id?}')}}</a></li>
             <li>Delete -<a href="{{url('/module/people/post/component/filter/content/delete/{filter_id}')}}" target="_blank">{{url('/module/people/post/component/filter/content/delete/{filter_id}')}}</a></li>
-            <h3>Relation Section</h3>
+            <h3 style="font-size:20px">Relation Section</h3>
             <li>Relation-<a href="{{url('/module/people/post/relation/category/list')}}" target="_blank">{{url('/module/people/post/relation/category/list')}}</a></li>
-            <h3>Table Data Section</h3>
+            <li>Search-<a href="{{url('/module/people/post/relation/category/list?search_text=ex')}}" target="_blank">{{url('/module/people/post/relation/category/list?search_text=ex')}}</a></li>
+            <h3 style="font-size:20px">Table Data Section</h3>
             <li>Structure-<a href="{{url('/module/people/post/component/table/structure')}}" target="_blank">{{url('/module/people/post/component/table/structure')}}</a></li>
             <li>Content -<a href="{{url('/module/people/post/component/table/content')}}" target="_blank">{{url('/module/people/post/component/table/content')}}</a></li>
-            <h3>For showing Selected Data</h3>
-            <li>Selected Data-<a href="{{url('/api/post/component/table/data')}}" target="_blank">{{url('/api/post/component/table/data')}}</a></li>
+            <h2 style="font-size:20px">Param Query Generated URL for Filtering</h2>
+            <li> Filter-<a href="{{url('/module/people/post/component/table/content?filters[title][$contains]=adipisci')}}" target="_blank">{{url('/module/people/post/component/table/content?filters[title][$contains]=adipisci')}}</a></li>
+            <li> Sort-<a href="{{url('/module/people/post/component/table/content?sort=status:asc')}}" target="_blank">{{url('/module/people/post/component/table/content?sort=status:asc')}}</a></li>
         </div>
 
     </div>

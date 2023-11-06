@@ -33,7 +33,7 @@ trait FilterTrait
             $endPoint = '';
 
             if (!empty($value['model'])) {
-                $endPoint = '/api/post/relation/' . Str::snake(class_basename($value['model'])) . '/list';
+                $endPoint = '/module/people/post/relation/' . Str::snake(class_basename($value['model'])) . '/list';
             }
             $data[$key] = [
                 'label' => $value['label'] ?? '',
