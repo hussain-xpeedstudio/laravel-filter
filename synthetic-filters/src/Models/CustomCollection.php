@@ -13,15 +13,23 @@ class CustomCollection extends Collection
      */
 
     /**
-     * Pass only object onto old value and new value
+     * This method change the objects into a flat array
+     * ex: category_name comes from 
+     * category{
+     *      'name': 'xpeed-studio'     
+     * }
      */
     public function toFlatArray()
     {
-        $relations = $this[0]->getRelations();
-
         foreach ($this as $value) {
-            foreach ($relations as $key => $relation) {
-                $value->setAttribute($key . '_name', $value->$key->name);
+            foreach ($value::getValidRelations() as $relation) {
+                if (array_key_exists('relationColumn', $relation)) {
+                    foreach ($relation['relationColumn'] as $field) {
+                        $value->{$relation['relationWith'] . '_' . $field} = $value->{$relation['relationWith']}->$field;
+                    }
+                } else {
+                    $value->{$relation['relationWith'] . '_name'} = $value->{$relation['relationWith']}->name;
+                }
             }
         }
         return $this;
