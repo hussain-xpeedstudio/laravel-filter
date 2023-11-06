@@ -8,7 +8,8 @@ use SyntheticComments\trait\CommentTrait;
 
 class Comment extends Model
 {
-    use CommentTrait,HasFactory;
+    use CommentTrait, HasFactory;
+
     protected $fillable = [
         'resource', 'resource_id', 'parent_comment_id', 'body', 'type', 'visibility', 'user_id',
     ];
@@ -26,8 +27,7 @@ class Comment extends Model
     public function replies()
     {
         return $this->hasMany(Resource::class, 'parent_comment_id', 'id')
-            ->from(config('synthetic-comments.table_prefix').'_'.$this->table)
+            ->from(config('synthetic-comments.table_prefix') . '_' . $this->table)
             ->SetDatabase();
     }
-
 }

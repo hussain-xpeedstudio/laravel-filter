@@ -8,6 +8,7 @@ use MongoDB\Laravel\Eloquent\Model;
 class Resource extends Model
 {
     use HasFactory;
+
     protected $model;
     protected $commentTable;
     protected $fillable = [
@@ -27,8 +28,7 @@ class Resource extends Model
     public function replies()
     {
         return $this->hasMany(Resource::class, 'parent_comment_id', 'id')
-            ->from(config('synthetic-comments.table_prefix').'_'.$this->table)
+            ->from(config('synthetic-comments.table_prefix') . '_' . $this->table)
             ->SetDatabase();
     }
-
 }

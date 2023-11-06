@@ -58,7 +58,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected function getValidRelations()
+     protected function getValidRelations()
     {
         return [
             'category_id' => [

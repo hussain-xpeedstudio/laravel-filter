@@ -22,11 +22,11 @@ Route::get('/', function () {
 Route::get('/response', [ResponseController::class, 'getResponse']);
 Route::get('/attribute', function () {
     // return Document::$filter_attribute;
-    $data = new Document;
+    $data = new Document();
     return $data->getFilterData();
 });
 Route::get('/attribute1', function () {
-    $data = new Document;
+    $data = new Document();
     return $data->filter();
 });
 

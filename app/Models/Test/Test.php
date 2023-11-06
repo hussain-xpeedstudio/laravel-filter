@@ -8,7 +8,8 @@ use SyntheticFilters\Traits\FilterTrait;
 
 class Test extends Model
 {
-    use FilterTrait,HasFactory;
+    use FilterTrait, HasFactory;
+
     public $filterableAttributes = [
         'title' => [
             'type' => self::TEXT,
