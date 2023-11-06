@@ -2,6 +2,7 @@
 
 namespace SyntheticFilters\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use SyntheticFilters\Models\Filter;
@@ -60,5 +61,5 @@ class FilterController
     {
         //
     }
-
+  
 }

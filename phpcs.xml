@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="Custom Coding Standard">
+<ruleset ref="squizlabs/php_codesniffer@3.6.1">
     <description>My Custom Coding Standard</description>
     <rule ref="PSR1"/>
     <rule ref="PSR2"/>
     <rule ref="PSR12"/>
+    
+    <exclude name="Generic.Traits.UseDeclaration"/>
+
     <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
         <type>warning</type>
     </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="1200" />
+            <property name="absoluteLineLimit" value="true" />
+        </properties>
+    </rule>
+
+
+    <exclude-pattern>*.blade.php</exclude-pattern>
     <exclude-pattern>dev-*</exclude-pattern>
 	<exclude-pattern>node_modules/*</exclude-pattern>
 	<exclude-pattern>vendor/*</exclude-pattern>
