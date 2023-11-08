@@ -8,6 +8,7 @@ trait ResponseTrait
 
     public function response($status = 200, array $data = [], array $headers = [], $tracer = null)
     {
+        
         $response = [
             'message' => [
                 $this->errorMessages,

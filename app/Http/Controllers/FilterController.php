@@ -45,7 +45,10 @@ class FilterController extends Controller
     {
         $properties = new Post();
         $this->log('success', 'Data Fetched successfully');
-        $filter_data = Filter::where(['resource' => 'App\Models\Post', 'user_id' => '1'])->first() ?? Filter::where(['resource' => 'App\Models\Post', 'visibility' => true])->first();
+        $filter_data = Filter::where([
+            'resource' => 'App\Models\Post',
+            'user_id' => '1'
+        ])->first() ?? Filter::where(['resource' => 'App\Models\Post', 'visibility' => true])->first();
         return $this->response(
             data: $filter_data ? $filter_data->toArray() : [],
             status: 200
@@ -63,7 +66,7 @@ class FilterController extends Controller
                 'visibility' => 'required|boolean',
             ]);
             if ($validator->fails()) {
-                $this->log('error', 'validation fails');
+                $this->log('error', $validator->errors());
                 return $this->response(
                     data: [],
                     status: 403
@@ -98,7 +101,7 @@ class FilterController extends Controller
             }
             return $this->response(
                 data: $data->toArray(),
-                status: 404
+                status: 200
             );
         } catch (\Exception $e) {
             $this->log('error', $e->getMessage());
@@ -123,6 +126,7 @@ class FilterController extends Controller
                 );
             }
             return $this->response(
+
                 data: [],
                 status: 200
             );
@@ -148,10 +152,10 @@ class FilterController extends Controller
         $search_text = request('search_text');
         $categories = $search_text ?
             Category::where('name', 'like', '%' . $search_text . '%')
-            ->select(['id', 'name', 'status'])
+            ->select(['id', 'name'])
             ->simplePaginate(10)
             :
-            Category::select(['id', 'name', 'status'])
+            Category::select(['id', 'name'])
             ->simplePaginate(10);
         $this->log('success', 'Data Fetched successfully');
         return $this->response(

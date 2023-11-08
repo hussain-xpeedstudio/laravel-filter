@@ -31,7 +31,6 @@ trait FilterTrait
         $data = [];
         foreach ($filterAttribute as $key => $value) {
             $endPoint = '';
-
             if (!empty($value['model'])) {
                 $endPoint = '/module/people/post/relation/' . Str::snake(class_basename($value['model'])) . '/list';
             }

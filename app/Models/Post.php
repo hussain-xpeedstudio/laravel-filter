@@ -11,6 +11,11 @@ class Post extends Model
 {
     use FilterTrait, HasFactory;
     protected $fillable = ['title', 'description', 'status', 'user_id', 'category_id'];
+    public static $print;
+    protected static function boot()
+    {
+        dd("Boot ");
+    }
     public $filterableAttributes = [
         'title' => [
             'type' => self::TEXT,
@@ -58,7 +63,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-     protected function getValidRelations()
+    protected function getValidRelations()
     {
         return [
             'category_id' => [

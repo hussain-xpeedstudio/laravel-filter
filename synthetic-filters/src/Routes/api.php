@@ -13,6 +13,3 @@ use SyntheticFilters\Controllers\FilterController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::get('api/filter/{table_id}', [FilterController::class, 'filterStructureGet']);
-Route::post('api/filter/{table}/{table_id}', [FilterController::class, 'filterStructureSave']);
